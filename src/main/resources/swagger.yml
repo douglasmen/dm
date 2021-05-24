@@ -1,0 +1,113 @@
+---
+swagger: "2.0"
+info:
+  description: "Teste Banco Itau"
+  version: "1.0.0"
+  title: "API - Banco Itau"
+produces:
+- "application/json"
+paths:
+ 
+  /usuarios:
+ 
+    post:
+      summary: cadastra um novo usuario
+      description: Metodo criado para cadastrar um usuario
+      operationId: cadastrarUsuario
+      parameters:
+       - name: dadosUsuarios
+         in: body
+         description: "dados usados para inserir um novo usuario"
+         required: true
+         schema:
+          $ref: "#/definitions/UsuarioModel"
+      responses:
+        200:
+          description: Usuario cadastrado com sucesso
+        422:
+          description: Usuario nao encontrado
+          schema:
+            $ref: '#/definitions/ErroModel'
+           
+    patch:
+      summary: altera um usuario cadastrado
+      description: Metodo criado para alterar parte ou todo um usuario
+      operationId: alterarUsuario
+      parameters:
+       - name: dadosUsuarios
+         in: body
+         description: "dados que podem ser alterados do usuario"
+         required: true
+         schema:
+          $ref: "#/definitions/UsuarioModel"
+      responses:
+        200:
+          description: Usuario cadastrado com sucesso
+        422:
+          description: Usuario nao encontrado
+          schema:
+            $ref: '#/definitions/ErroModel'
+ 
+  /usuarios/{cpf}:
+ 
+    get:
+      summary: busca um usuario cadastrado
+      description: Metodo criado para buscar um usuario
+      operationId: buscarUsuario
+      parameters:
+       - name: cpf
+         in: path
+         type: string
+         required: true
+         description: "cpf do usuario cadastrado"
+      responses:
+        200:
+          description: Usuario recuperado com sucesso
+          schema:
+            $ref: '#/definitions/UsuarioModel'
+        422:
+          description: Usuario nao encontrado
+          schema:
+            $ref: '#/definitions/ErroModel'
+           
+    delete:
+      summary: deleta um usuario
+      description: Metodo criado para deletar um usuario
+      operationId: deletarUsuario
+      parameters:
+       - name: cpf
+         in: path
+         type: string
+         required: true
+         description: "usuario deletado"
+      responses:
+        200:
+          description: Usuario deletado com sucesso
+        422:
+          description: Usuario nao encontrado
+          schema:
+            $ref: '#/definitions/ErroModel'
+ 
+definitions:
+  UsuarioModel:
+    type: object
+    properties:
+      nome:
+        type: string
+        description: "nome do usuario com no máximo 50 caracteres"
+        example: "DOUGLAS MENDES"
+      email:
+        type: string
+        description: "email do usuario com no máximo 50 caracteres"
+        example: "douglas@foo.com.br"
+      cpf:
+        type: string
+        description: "cpf do usuario"
+        example: "11111111111"
+  ErroModel:
+    type: object
+    properties:
+      descricao:
+        type: string
+        description: "Resposta enviada do serviço"
+        example: "Usuario não encontrado"
