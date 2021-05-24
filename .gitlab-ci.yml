@@ -48,7 +48,7 @@
         - pip install awscli
       #  - docker login -u AWS -p $(aws ecr get-login-password --region sa-east-1) 523059994343.dkr.ecr.sa-east-1.amazonaws.com
       #  - $(aws ecr get-login --region sa-east-1)
-        - aws ecr get-login-password --region region | docker login --username AWS --password-stdin 523059994343.dkr.ecr.region.amazonaws.com
+        - $(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 523059994343.dkr.ecr.region.amazonaws.com
         - docker build -t $REPOSITORY_URL:latest .
         - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
         - docker push $REPOSITORY_URL:latest
