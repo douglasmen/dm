@@ -1,9 +1,9 @@
-#before_script:
-#      - IMAGE_TAG="$(echo $CI_COMMIT_SHA | head -c 8)"  
+before_script:
+      - IMAGE_TAG="$(echo $CI_COMMIT_SHA | head -c 8)"  
 
- #   cache:
- #     paths:
- #       - maven.repository/
+    cache:
+      paths:
+        - maven.repository/
 
     variables:
       MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=maven.repository/"
@@ -14,7 +14,7 @@
       - unit-test
   #    - integration-test
       - package
-  #    - deploy
+      - deploy
 
     maven-unit-test:
       image: maven:3-jdk-8
