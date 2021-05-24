@@ -1,4 +1,4 @@
-package br.com.usuario.dao;
+package br.com.dm.usuario.dao;
 
 import java.util.HashMap;
 import java.util.Map;
