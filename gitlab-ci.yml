@@ -1,5 +1,5 @@
 #before_script:
-#      - IMAGE_TAG="$(echo $CI_COMMIT_SHA | head -c 8)"
+#      - IMAGE_TAG="$(echo $CI_COMMIT_SHA | head -c 8)"  
 
  #   cache:
  #     paths:
