@@ -46,11 +46,9 @@
       script:
         - apk add --no-cache curl jq python3 py-pip
         - pip install awscli
-        - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-        - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        - aws configure set region $AWS_DEFAULT_REGION
       #  - docker login -u AWS -p $(aws ecr get-login-password --region sa-east-1) 523059994343.dkr.ecr.sa-east-1.amazonaws.com
-        - $(aws ecr get-login --region sa-east-1)
+      #  - $(aws ecr get-login --region sa-east-1)
+        - aws ecr get-login-password --region region | docker login --username AWS --password-stdin 523059994343.dkr.ecr.region.amazonaws.com
         - docker build -t $REPOSITORY_URL:latest .
         - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
         - docker push $REPOSITORY_URL:latest
